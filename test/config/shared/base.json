@@ -1,0 +1,7 @@
+{
+  "mqtt": {
+    "username": "testing",
+    "connection": "wss://mqtt",
+    "password": "lala"
+  }
+}
