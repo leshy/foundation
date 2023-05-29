@@ -40,20 +40,24 @@ export enum LogLevel {
 }
 
 // from https://github.com/itsfadnis/datadog-winston
-
-export type LoggerTransportConfig = {
+export type LoggerTransportConfigCore = {
   enabled: boolean
 }
 
-export type DataDogConfig = LoggerTransportConfig & {
+export type DataDogConfig = LoggerTransportConfigCore & {
   apiKey: string,
   source?: string // The technology from which the logs originated
   tags?: { [tag: string]: string } // Metadata assoicated with the logs
   intakeRegion?: string // The datadog intake to use. set to eu to force logs to be sent to the EU specific intake
 }
 
-export type ConsoleConfig = LoggerTransportConfig & {
+export type ConsoleConfig = LoggerTransportConfigCore & {
   json?: boolean
+}
+
+export type LoggerTransportConfig = {
+  datadog?: DataDogConfig,
+  console?: ConsoleConfig
 }
 
 export type LoggerInitArgs = {
