@@ -55,7 +55,7 @@ export interface Buffer<T> {
   out: () => Promise<T>
 }
 
-export interface GenBuffer<T> {
+export interface BufferStore<T> {
   in: (value: T) => Promise<boolean>
   out: () => AsyncGenerator<T>
   flush: () => AsyncGenerator<T | undefined>
