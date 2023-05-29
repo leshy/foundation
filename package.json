@@ -11,24 +11,19 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "start": "dts watch",
+    "build": "dts build",
+    "test": "dts test",
+    "lint": "dts lint",
+    "prepare": "dts build",
     "size": "size-limit",
     "analyze": "size-limit --why"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
   },
   "prettier": {
     "printWidth": 80,
     "semi": true,
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "none"
   },
   "name": "foundation",
   "author": "Ivan Nikolic",
@@ -46,7 +41,6 @@
   "devDependencies": {
     "@size-limit/preset-small-lib": "^8.2.4",
     "@types/lodash": "^4.14.195",
-    "husky": "^8.0.3",
     "size-limit": "^8.2.4",
     "tslib": "^2.5.2",
     "typescript": "^5.0.4"
@@ -55,6 +49,7 @@
     "ajv": "^8.12.0",
     "dts-cli": "^2.0.3",
     "lodash": "^4.17.21",
-    "pino": "^8.14.1"
+    "winston": "^3.9.0",
+    "winston-console-format": "^1.0.8"
   }
 }

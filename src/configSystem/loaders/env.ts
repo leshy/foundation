@@ -6,7 +6,7 @@ export const env: ConfigLoader = (verbose: boolean = false): AppConfigLeaf =>
   reduce(
     process.env,
     (total, val, key) => {
-      if (!startsWith(key, 'lenus_')) {
+      if (!startsWith(key, 'cfg_')) {
         return total
       }
 

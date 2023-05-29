@@ -4,8 +4,19 @@ export type Maybe<T> = void | T
 export type MaybePromise<T> = T | Promise<T>
 export type MaybeFunction<T> = (() => T) | T
 export type MaybeAsync<T> = MaybeFunction<MaybePromise<T>>
+
+
+// dictionary with potential functions as values
 export type MaybeFunctionProps<T> = object &
   { [K in keyof T]: MaybeFunction<T[K]> }
+
+// dictionary with potential async functions as values
+export type MaybeAsyncProps<T> = object & { [K in keyof T]: MaybeAsync<T[K]> }
+
+// dictionary with potential promises as values
+export type MaybePromiseProps<T> = object &
+  { [K in keyof T]: MaybePromise<T[K]> }
+
 
 // jsonable stuff
 export type BasicType = string | number | boolean | void
