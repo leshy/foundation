@@ -139,7 +139,7 @@ export const catchLast = <PAYLOAD>(cb: MaybeAsyncTransform<PAYLOAD | void, any>)
     return await cb(last)
   }
 
-export const lifo = <PAYLOAD>(): types.GenBuffer<PAYLOAD> => {
+export const lifo = <PAYLOAD>(): types.BufferStore<PAYLOAD> => {
   const data: Array<PAYLOAD> = []
   let resolve: void | ((el: PAYLOAD) => any)
 
@@ -172,7 +172,7 @@ export const lifo = <PAYLOAD>(): types.GenBuffer<PAYLOAD> => {
   }
 }
 
-export const fifo = <PAYLOAD>(): types.GenBuffer<PAYLOAD> => {
+export const fifo = <PAYLOAD>(): types.BufferStore<PAYLOAD> => {
   const data: Array<PAYLOAD> = []
   let resolve: void | ((el: PAYLOAD) => any)
 
@@ -206,11 +206,11 @@ export const fifo = <PAYLOAD>(): types.GenBuffer<PAYLOAD> => {
 }
 
 type BindBuffer<PAYLOAD> = (cb: (event: PAYLOAD) => any) => any
-export const buffer = <PAYLOAD>(b: types.GenBuffer<PAYLOAD>) => (
+export const buffer = <PAYLOAD>(store: types.BufferStore<PAYLOAD>) => (
   bindBuffer: BindBuffer<PAYLOAD>
 ): AsyncGenerator<PAYLOAD> => {
-  bindBuffer(b.in)
-  return b.out()
+  bindBuffer(store.in)
+  return store.out()
 }
 
 export const bufferFifo = buffer(fifo())
