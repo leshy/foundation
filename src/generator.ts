@@ -232,7 +232,7 @@ export const by = <X>(selector: Selector) =>
     iterator: AsyncGenerator<X>,
     //iteratorCallback: IteratorCallback<X, any>
   ): AsyncGenerator<AsyncGenerator<X>> {
-    const streams: { [name: string]: types.GenBuffer<X> } = {}
+    const streams: { [name: string]: types.BufferStore<X> } = {}
     for await (const msg of iterator) {
       const name = selector(msg)
       if (!streams[name]) {
@@ -269,7 +269,7 @@ export const collect = async function*<X>(
   metaIterator: AsyncGenerator<AsyncGenerator<X>>
 ): AsyncGenerator<X> {
   const drain = async <X>(
-    buffer: types.GenBuffer<X>,
+    buffer: types.BufferStore<X>,
     iterator: AsyncGenerator<X>
   ) => {
     for await (const msg of iterator) {
