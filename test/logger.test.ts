@@ -1,27 +1,20 @@
 import { Env } from '../src/configSystem/base'
 import * as logger from '../src/logger'
 
-describe('loggers', () => {
-
-  test('console', () => {
+describe('logger', () => {
+  test('init console json', () => {
     const l = logger.init({
-      name: 'testservice',
       env: Env.Testing,
-      transport: {
-        console: {
-          enabled: true
-        }
+      name: 'foundation-test',
+      productionConsole: true,
+      transports: {
+        console: { enabled: false },
       }
     })
 
+    l.info({ somedata: 3, pino: true, }, "a message from pino production logger")
 
-    l.log('info', "a message from logger", { somedata: 3, pino: true, })
-
-    const ll = l.child({ service: "testservice-child" })
-    ll.log('info', "forked into a child and renamed a service", { somedata: 4, pino: true })
-
-
+    const ll = l.child({ service: "foundation-test-child" })
+    ll.info({ somedata: 4, pino: true }, "forked production logger into a child and renamed a service console")
   })
-
-
 })
