@@ -16,7 +16,7 @@ export const init = <CONFIG extends configSystem.AppConfig>({
   }> =>
   configSystem.loadConfig<CONFIG>(configSystemArgs).then((config: CONFIG) => ({
     logger: logger.init({
-      name: (config.name as string),
+      name: name,
       env: config.env,
       transports: config.logger ? config.logger : { console: { enabled: true } }
     }),
