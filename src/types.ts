@@ -60,3 +60,11 @@ export interface BufferStore<T> {
   out: () => AsyncGenerator<T>
   flush: () => AsyncGenerator<T | undefined>
 }
+
+// services
+// ==========================
+export interface Service<CONFIG> {
+  config: CONFIG
+  init: (...args: Array<any>) => Promise<any>
+  stop: () => Promise<any>
+}

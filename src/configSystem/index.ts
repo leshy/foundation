@@ -95,6 +95,29 @@ const hardcodedDefaults: AppConfig = {
   rootDir: path.join(__dirname, '../../../'),
 }
 
+
+const getEnv = (): Env => {
+  if (process.env.ENV) {
+    switch (process.env.ENV.toLowerCase()) {
+      case 'development':
+        return Env.Development
+      case 'testing':
+        return Env.Testing
+      case 'test':
+        return Env.Testing
+      case 'prod':
+        return Env.Production
+      case 'production':
+        return Env.Production
+      default:
+        console.warn("ENV environment variable set to unknown value, defaulting to development")
+        return Env.Development
+    }
+  } else {
+    return Env.Development
+  }
+}
+
 // TODO: this should always run only once.
 // Create a caching loadConfig function, via caching promise wrapper util function
 export const loadConfig = async <CONFIG extends AppConfig>(
@@ -104,10 +127,8 @@ export const loadConfig = async <CONFIG extends AppConfig>(
     defaultConfig: {},
     configDir: path.join(__dirname, '../../../config'),
     verbose: true,
-    env: process.env.NODE_ENV
-      ? // this needs some checking & enforcement
-      (process.env.NODE_ENV.toLowerCase() as Env)
-      : Env.Development
+
+    env: getEnv()
   }
 
   const opts: LoadConfigOpts = mergeByPriority([
@@ -213,4 +234,3 @@ export const loadConfigCached = <CONFIG extends AppConfig>(
   // @ts-ignore
   return config ? Promise.resolve(config) : loadConfig(args)
 }
-
