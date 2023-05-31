@@ -97,24 +97,20 @@ const hardcodedDefaults: AppConfig = {
 
 
 const getEnv = (): Env => {
-  if (process.env.ENV) {
-    switch (process.env.ENV.toLowerCase()) {
-      case 'development':
-        return Env.Development
-      case 'testing':
-        return Env.Testing
-      case 'test':
-        return Env.Testing
-      case 'prod':
-        return Env.Production
-      case 'production':
-        return Env.Production
-      default:
-        console.warn("ENV environment variable set to unknown value, defaulting to development")
-        return Env.Development
-    }
-  } else {
-    return Env.Development
+  switch (process.env. /* treeshake disable */ NODE_ENV && process.env.NODE_ENV.toLowerCase()) {
+    case 'development':
+      return Env.Development
+    case 'testing':
+      return Env.Testing
+    case 'test':
+      return Env.Testing
+    case 'prod':
+      return Env.Production
+    case 'production':
+      return Env.Production
+    default:
+      console.warn("ENV environment variable set to unknown value, defaulting to development")
+      return Env.Development
   }
 }
 
