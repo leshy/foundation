@@ -3,9 +3,9 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "files": ["dist", "src"],
+  "files": ["dist"],
   "engines": {
-    "node": ">=10"
+    "node": ">=15"
   },
   "scripts": {
     "start": "dts watch",
@@ -14,7 +14,8 @@
     "lint": "dts lint",
     "prepare": "dts build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "package": "npm install && npm run build && npm test && npm publish"
   },
   "prettier": {
     "printWidth": 80,
